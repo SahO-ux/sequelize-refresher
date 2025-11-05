@@ -7,8 +7,8 @@ import connectToPostgres from "./postgresDB/connect.js";
 import { postgresConfig } from "./postgresDB/config.js";
 import sequelize from "./postgresDB/sequelize.js";
 
-// Importing models to register them with Sequelize
-import "./server/modules/User/user-model.js";
+// Importing all modules routes
+import userRouter from "./server/modules/User/index.js";
 
 dotenv.config({ quiet: true });
 
@@ -22,6 +22,9 @@ app.use(morgan("dev"));
 app.get("/", (req, res) =>
   res.json({ message: "Hello from Sequelize Refresher!" })
 );
+
+// Importing all modules routes
+app.use("/users", userRouter);
 
 const startServer = async () => {
   try {
